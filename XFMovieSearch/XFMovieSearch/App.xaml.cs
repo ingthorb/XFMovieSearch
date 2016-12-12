@@ -13,7 +13,15 @@ namespace XFMovieSearch
         {
             InitializeComponent();
 
-            MainPage = new XFMovieSearch.MainPage();
+            MainPage = new NavigationPage(new TabbedPage()
+            {
+                Children =
+                {
+                    new MainPage(),
+                    new TopList()
+                }
+            });
+            
         }
 
         protected override void OnStart()

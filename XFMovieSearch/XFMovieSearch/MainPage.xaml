@@ -2,10 +2,42 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XFMovieSearch"
-             x:Class="XFMovieSearch.MainPage">
+             x:Class="XFMovieSearch.MainPage"
+             Title="Movie Search"
+             BackgroundColor="#262626">
 
-  <Label Text="Welcome to Xamarin Forms!"
-           VerticalOptions="Center"
-           HorizontalOptions="Center" />
+<StackLayout Margin="30"
+             VerticalOptions = "Center"
+             Spacing="20"
+             BackgroundColor ="#262626">
+  <Label x:Name="EnterMovieLabel"
+         FontSize="30"
+         Text="Search for a movie!"
+         TextColor="White"
+         FontFamily="Helvetica"
+         FontAttributes="Bold"/>
+  
+  <Entry x:Name="MainEntry"
+         BackgroundColor ="#424242"
+         Placeholder="Forrest Gump...."
+         PlaceholderColor="#FFFAF0"
+         TextColor="White"/>
+  
+<Button Clicked="Button_OnClicked"
+        Text="Search"
+        HorizontalOptions ="LayoutOptions.Fill"
+        BackgroundColor="Orange"
+        TextColor="White"/>
+  
+  <Label x:Name="MovieLabel"
+         FontSize="25"
+         TextColor ="White"
+         FontFamily="Helvetica"
+         FontAttributes="Bold"/>
+  
+  <ActivityIndicator x:Name="_indicator"
+                     Color="White"
+                     IsRunning="false"/>
+</StackLayout> 
 
 </ContentPage>
