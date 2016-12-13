@@ -5,11 +5,11 @@
              x:Class="XFMovieSearch.MainPage"
              Title="Movie Search"
              BackgroundColor="#262626">
-
-<StackLayout Margin="30"
-             VerticalOptions = "Center"
+  
+<StackLayout VerticalOptions = "Center"
              Spacing="20"
-             BackgroundColor ="#262626">
+             BackgroundColor ="#262626"
+             Margin="30">
   
   <Label x:Name="EnterMovieLabel"
          FontSize="30"
@@ -27,7 +27,7 @@
 <Button Clicked="Button_OnClicked"
         Text="Search"
         HorizontalOptions ="LayoutOptions.Fill"
-        BackgroundColor="Orange"
+        BackgroundColor="#FFA500"
         TextColor="White"/>
   
   <Label x:Name="MovieLabel"
