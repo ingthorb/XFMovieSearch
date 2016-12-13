@@ -42,7 +42,7 @@ namespace XFMovieSearch
 
 				var firstThree = this._api.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());
 
-				MovieDTO newMovie = new MovieDTO(info.Id, info.Title, firstThree, info.PosterPath, 
+				MovieDTO newMovie = new MovieDTO(info.Id, info.Title, firstThree ?? " ", info.PosterPath, 
 				                                 info.ReleaseDate.Year.ToString(), info.BackdropPath);
 
 				this._movieList.Add(newMovie);

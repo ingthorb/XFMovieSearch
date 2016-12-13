@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XFMovieSearch.MovieListXF"
@@ -8,6 +8,33 @@
   <ContentPage.Content>
     <ListView x:Name="listview"
               ItemsSource="{Binding .}"
-              ItemSelected="Listview_OnItemSelected"/>
+              ItemSelected="Listview_OnItemSelected"
+			  HasUnevenRows="True">
+		<ListView.ItemTemplate>
+			<DataTemplate>
+				<ViewCell>
+					<Grid Padding="10,5">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="*"></RowDefinition>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+							<ColumnDefinition Width="40"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Label Grid.Row="0" Grid.Column="0"
+								Text="{Binding title}"
+								FontAttributes="None"
+								FontSize="Medium"
+								TextColor="#ffffff"/>
+						<Label Grid.Row="1" Grid.Column="0"
+								Text="{Binding firstThreeCastMembers}"
+								FontSize="Small"
+								TextColor="#ffffff"/>
+					</Grid>
+				</ViewCell>
+			</DataTemplate>
+		</ListView.ItemTemplate>
+	</ListView>
   </ContentPage.Content>
 </ContentPage>  
