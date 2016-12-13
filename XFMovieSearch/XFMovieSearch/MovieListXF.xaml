@@ -8,9 +8,6 @@
   <ContentPage.Content>
     <ListView x:Name="listview"
               ItemsSource="{Binding .}"
-              ItemSelected="Listview_OnItemSelected"
-            />
-   
+              ItemSelected="Listview_OnItemSelected"/>
   </ContentPage.Content>
-
-</ContentPage>
+</ContentPage>  

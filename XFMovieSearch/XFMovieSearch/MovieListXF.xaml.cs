@@ -14,14 +14,13 @@ namespace XFMovieSearch
         {
             InitializeComponent();
         }
-        private void Listview_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void Listview_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
             {
                 return;
             }
-
-            this.DisplayAlert(e.SelectedItem.ToString(), string.Empty, "Ok");
+            await Navigation.PushAsync(new DetailedMovieXF(e.SelectedItem));
         }
     }
 }
