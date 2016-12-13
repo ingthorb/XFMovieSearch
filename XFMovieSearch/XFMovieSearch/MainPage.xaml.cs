@@ -26,6 +26,8 @@ namespace XFMovieSearch
 
         private async void Button_OnClicked(object sender, EventArgs e)
         {
+			this._movieList.Clear();
+
 			if (MainEntry.Text == null || MainEntry.Text == "")
             {
                 return;

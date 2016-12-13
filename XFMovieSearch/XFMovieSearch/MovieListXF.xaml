@@ -15,22 +15,26 @@
 				<ViewCell>
 					<Grid Padding="10,5">
 						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto"></RowDefinition>
-							<RowDefinition Height="*"></RowDefinition>
+							<RowDefinition Height="40"></RowDefinition>
+							<RowDefinition Height="40"></RowDefinition>
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*"></ColumnDefinition>
 							<ColumnDefinition Width="40"></ColumnDefinition>
 						</Grid.ColumnDefinitions>
 						<Label Grid.Row="0" Grid.Column="0"
-								Text="{Binding title}"
+								Text="{Binding titleAndYear}"
 								FontAttributes="None"
 								FontSize="Medium"
-								TextColor="#ffffff"/>
+								TextColor="#ffa500"/>
 						<Label Grid.Row="1" Grid.Column="0"
 								Text="{Binding firstThreeCastMembers}"
 								FontSize="Small"
-								TextColor="#ffffff"/>
+								TextColor="#ffa500"/>
+						<Image Grid.Row="0" Grid.Column="1"
+								Grid.RowSpan="2"
+								HeightRequest="30"
+								Source="{Binding imgPath}"/>
 					</Grid>
 				</ViewCell>
 			</DataTemplate>

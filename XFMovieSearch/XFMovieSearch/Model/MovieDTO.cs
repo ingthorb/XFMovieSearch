@@ -34,11 +34,13 @@ namespace XFMovieSearch
 
 		public string firstThreeCastMembers => this._firstThreeCastMembers;
 
-		public string imgPath => this._imgPath;
+		public string imgPath => "http://image.tmdb.org/t/p/w154" + this._imgPath;
 
 		public string releaseYear => this._releaseYear;
 
 		public string backdropPath => this._backdropPath;
+
+		public string titleAndYear => this._title + " (" + this._releaseYear + ")";
 
 		public override string ToString()
 		{
