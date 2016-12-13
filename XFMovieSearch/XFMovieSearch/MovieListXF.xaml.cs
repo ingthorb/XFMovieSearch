@@ -20,6 +20,7 @@ namespace XFMovieSearch
             {
                 return;
             }
+
             await Navigation.PushAsync(new DetailedMovieXF(e.SelectedItem));
         }
     }
