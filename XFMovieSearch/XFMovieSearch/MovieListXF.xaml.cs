@@ -10,12 +10,9 @@ namespace XFMovieSearch
 {
     public partial class MovieListXF : ContentPage
     {
-        //private List<MovieInfo> _movieFound;
-
-        public MovieListXF(string title)
+        public MovieListXF()
         {
             InitializeComponent();
-            MainLabel.Text = title;
         }
     }
 }

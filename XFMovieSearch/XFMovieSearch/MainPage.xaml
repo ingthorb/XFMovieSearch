@@ -10,6 +10,7 @@
              VerticalOptions = "Center"
              Spacing="20"
              BackgroundColor ="#262626">
+  
   <Label x:Name="EnterMovieLabel"
          FontSize="30"
          Text="Search for a movie!"
@@ -38,6 +39,7 @@
   <ActivityIndicator x:Name="_indicator"
                      Color="White"
                      IsRunning="false"/>
+
 </StackLayout> 
 
 </ContentPage>

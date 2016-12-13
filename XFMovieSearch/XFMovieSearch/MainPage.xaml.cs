@@ -29,15 +29,12 @@ namespace XFMovieSearch
             var resultTitle = movieFound.FirstOrDefault();
             this._indicator.IsRunning = false;
             
-            if (resultTitle.Title == null)
+            if (movieFound == null)
             {
                 this.MovieLabel.Text = "No movie found";
                 return;
             }
-            //await this.Navigation.PushAsync(new MovieListXF(resultTitle.Title));
-           await Navigation.PushAsync(new MovieListXF(resultTitle.Title));
-            //  this.MovieLabel.Text = resultTitle.Title + " (" + resultTitle.ReleaseDate.Year.ToString() +")";
-          //  this.MainEntry.Text = string.Empty;
+           await Navigation.PushAsync(new MovieListXF() {BindingContext = movieFound});
         }
     }
 }

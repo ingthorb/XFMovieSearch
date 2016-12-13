@@ -4,6 +4,7 @@
              x:Class="XFMovieSearch.TopList"
              Title="Top List"
              BackgroundColor="#262626" >
+  
   <Label x:Name ="MainLabel"
        TextColor="White"
        Text="Display Top List"/>
