@@ -13,6 +13,11 @@ namespace XFMovieSearch
 		private MovieAPI _movieAPI;
 		private MovieDTO _currMovie;
 
+		public DetailedMovieXF()
+		{
+			InitializeComponent();
+		}
+
 		public DetailedMovieXF(MovieDTO movieInfo)
 		{
 			this._movieAPI = new MovieAPI();
