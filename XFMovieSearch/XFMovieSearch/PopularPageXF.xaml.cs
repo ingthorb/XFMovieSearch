@@ -12,18 +12,30 @@ namespace XFMovieSearch
     public partial class PopularPageXF : ContentPage
     {
         private MovieAPI _movieAPI;
-        protected List<MovieInfo> _popularMovies;
+        protected List<MovieDTO> _movieList;
+
         public PopularPageXF()
         {
             InitializeComponent();
             this._movieAPI = new MovieAPI();
+            this._movieList = new List<MovieDTO>();
         }
         public async Task GetPopularList()
         {
             this._indicator.IsRunning = true;
             var popMovies = await this._movieAPI.GetPopularMovies();
-            this._popularMovies = popMovies;
-            BindingContext = this._popularMovies;
+            foreach (MovieInfo info in popMovies)
+            {
+                var allCrewMembers = await this._movieAPI.GetMovieCredits(info.Id);
+                System.Diagnostics.Debug.WriteLine("Inside top list");
+                var firstThree = this._movieAPI.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());
+
+                MovieDTO newMovie = new MovieDTO(info.Id, info.Title, firstThree ?? " ", info.PosterPath,
+                                                 info.ReleaseDate.Year.ToString(), info.BackdropPath);
+
+                this._movieList.Add(newMovie);
+            }
+            BindingContext = this._movieList;
             this._indicator.IsRunning = false;
         }
         private async void Listview_OnItemSelected(object sender, SelectedItemChangedEventArgs e)

@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XFMovieSearch.PopularPageXF">
+
   <ContentPage.Content>
     <StackLayout>
-      <ActivityIndicator x:Name="_indicator"
-                 Color="Black"
-                 IsRunning="false"/>
+    <ActivityIndicator x:Name="_indicator"
+           Color="Black"
+           IsRunning="false"/>
       <ListView x:Name="listview"
                 ItemsSource="{Binding .}"
                 ItemSelected="Listview_OnItemSelected">
