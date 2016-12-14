@@ -17,6 +17,7 @@ namespace XFMovieSearch
 
             MainPage = new NavigationPage(new TabbedPage()
             {
+				BackgroundColor = Color.Black,
                 Children =
                 {
                     new MainPage(),

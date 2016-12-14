@@ -10,17 +10,9 @@ namespace XFMovieSearch
 {
     public partial class DetailedMovieXF : ContentPage
     {
-        private object selectedItem;
-
-        public DetailedMovieXF()
-        {
-            InitializeComponent();
-        }
-
-        public DetailedMovieXF(object selectedItem)
-        {
-            this.selectedItem = selectedItem;
-           // MovieLabel.Text = selectedItem.ToString();
-        }
+		public DetailedMovieXF()
+		{
+			InitializeComponent();
+		}
     }
 }

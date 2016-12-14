@@ -9,7 +9,8 @@
     <ListView x:Name="listview"
               ItemsSource="{Binding .}"
               ItemSelected="Listview_OnItemSelected"
-			  HasUnevenRows="True">
+			  HasUnevenRows="True"
+			  BackgroundColor="Black">
 		<ListView.ItemTemplate>
 			<DataTemplate>
 				<ViewCell>
