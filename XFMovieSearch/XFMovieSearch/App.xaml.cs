@@ -9,22 +9,47 @@ namespace XFMovieSearch
 {
     public partial class App : Application
     {
+        public TabbedPage _tabbedPage;
+
         public App()
         {
             InitializeComponent();
+            var mainPage = new MainPage();
+            var mainPageNavigation = new NavigationPage(mainPage);
+            mainPageNavigation.Title = "Movie Search";
 
-			//MainPage = new NavigationPage(new MainPage());
+            var topPage = new TopList();
+            var topPageNavigation = new NavigationPage(topPage);
+            topPageNavigation.Title = "Top List";
 
-            MainPage = new NavigationPage(new TabbedPage()
+            var popPage = new PopularPageXF();
+            var popPageNavigation = new NavigationPage(popPage);
+            popPageNavigation.Title = "Popular";
+
+            var tabbedPage = new TabbedPage();
+            tabbedPage.Children.Add(mainPageNavigation);
+            tabbedPage.Children.Add(topPageNavigation);
+            tabbedPage.Children.Add(popPageNavigation);
+
+            this._tabbedPage = tabbedPage;
+            this.MainPage = tabbedPage;
+            System.Diagnostics.Debug.WriteLine("Inside app");
+            tabbedPage.CurrentPageChanged += async (sender, e) =>
             {
-                Children =
+                if(tabbedPage.CurrentPage.Equals(topPageNavigation))
                 {
-                    new MainPage(),
-                    new TopList()
+                    System.Diagnostics.Debug.WriteLine("Testing");
+                    await topPage.GetTopList();
                 }
-            });
-            
-        }
+                if (tabbedPage.CurrentPage.Equals(popPageNavigation))
+                {
+                    System.Diagnostics.Debug.WriteLine("PopPage");
+                    await popPage.GetPopularList();
+                }
+            };
+            }
+
+        
 
         protected override void OnStart()
         {
@@ -38,6 +63,7 @@ namespace XFMovieSearch
 
         protected override void OnResume()
         {
+            System.Diagnostics.Debug.WriteLine("Inside app");
             // Handle when your app resumes
         }
     }
