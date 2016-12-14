@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DM.MovieApi;
 using DM.MovieApi.ApiResponse;
+using DM.MovieApi.MovieDb.Genres;
 using DM.MovieApi.MovieDb.Movies;
 
 namespace XFMovieSearch
@@ -86,6 +87,7 @@ namespace XFMovieSearch
             }
             return res;
         }
+
         public string GetTopTenCastList(List<MovieCastMember> members)
         {
             string res = "";
@@ -112,5 +114,21 @@ namespace XFMovieSearch
             }
             return res;
         }
+
+		public string getGenres(IReadOnlyList<Genre> genres)
+		{
+			string genresStr = "";
+			for (var i = 0; i < genres.Count; i++)
+			{
+				genresStr += genres[i].Name;
+
+				if (i < genres.Count - 1)
+				{
+					genresStr += ", ";
+				}
+			}
+
+			return genresStr;
+		}
     }
 }

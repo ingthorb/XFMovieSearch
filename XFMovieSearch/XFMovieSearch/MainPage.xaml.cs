@@ -42,10 +42,14 @@ namespace XFMovieSearch
 			{
 				var allCrewMembers = await this._api.GetMovieCredits(info.Id);
 
-				var firstThree = this._api.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());
+				string firstThree = "";
+				if (allCrewMembers != null && allCrewMembers.CastMembers != null)
+				{
+					firstThree = this._api.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());
+				}
 
-				MovieDTO newMovie = new MovieDTO(info.Id, info.Title, firstThree ?? " ", info.PosterPath, 
-				                                 info.ReleaseDate.Year.ToString(), info.BackdropPath);
+				MovieDTO newMovie = new MovieDTO(info.Id, info.Title ?? "", firstThree ?? " ", info.PosterPath ?? "", 
+				                                 info.ReleaseDate.Year.ToString() ?? "", info.BackdropPath ?? "");
 
 				this._movieList.Add(newMovie);
 			}
