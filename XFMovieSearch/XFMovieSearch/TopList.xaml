@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XFMovieSearch.TopList"
@@ -6,13 +6,44 @@
 
     <ContentPage.Content>
       <StackLayout>
-      <ActivityIndicator x:Name="_indicator"
-                 Color="Black"
-                 IsRunning="false"/>
-      <ListView x:Name="listview"
-                ItemsSource="{Binding .}"
-                ItemSelected="Listview_OnItemSelected">
-      </ListView>
+	      <ActivityIndicator x:Name="_indicator"
+	                 Color="Black"
+	                 IsRunning="false"/>
+	      <ListView x:Name="listview"
+	              ItemsSource="{Binding .}"
+	              ItemSelected="Listview_OnItemSelected"
+				  HasUnevenRows="True"
+				  BackgroundColor="Black">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<Grid Padding="10,5">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="40"></RowDefinition>
+								<RowDefinition Height="40"></RowDefinition>
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"></ColumnDefinition>
+								<ColumnDefinition Width="40"></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Label Grid.Row="0" Grid.Column="0"
+									Text="{Binding titleAndYear}"
+									FontAttributes="None"
+									FontSize="Medium"
+									TextColor="#ffa500"/>
+							<Label Grid.Row="1" Grid.Column="0"
+									Text="{Binding firstThreeCastMembers}"
+									FontSize="Small"
+									TextColor="#ffa500"/>
+							<Image Grid.Row="0" Grid.Column="1"
+									Grid.RowSpan="2"
+									HeightRequest="30"
+									Source="{Binding imgPath}"/>
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
       </StackLayout>
     </ContentPage.Content>
 </ContentPage>

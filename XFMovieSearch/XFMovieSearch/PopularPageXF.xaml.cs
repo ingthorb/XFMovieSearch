@@ -45,7 +45,7 @@ namespace XFMovieSearch
                 return;
             }
 
-			await Navigation.PushAsync(new DetailedMovieXF((MovieDTO)e.SelectedItem));
+			await Navigation.PushAsync(new DetailedMovieXF((MovieDTO)e.SelectedItem) { BindingContext = e.SelectedItem });
         }
     }
 }
