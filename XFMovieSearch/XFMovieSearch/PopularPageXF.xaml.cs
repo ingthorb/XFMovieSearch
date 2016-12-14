@@ -17,20 +17,15 @@ namespace XFMovieSearch
         {
             InitializeComponent();
             this._movieAPI = new MovieAPI();
-            System.Diagnostics.Debug.WriteLine("Testing");
         }
-
         public async Task GetPopularList()
         {
             this._indicator.IsRunning = true;
             var popMovies = await this._movieAPI.GetPopularMovies();
             this._popularMovies = popMovies;
             BindingContext = this._popularMovies;
-            System.Diagnostics.Debug.WriteLine("*************PopMovies" + this._popularMovies);
             this._indicator.IsRunning = false;
-            System.Diagnostics.Debug.WriteLine("*************GetPopulr");
         }
-
         private async void Listview_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
@@ -38,7 +33,7 @@ namespace XFMovieSearch
                 return;
             }
 
-            await Navigation.PushAsync(new DetailedMovieXF(e.SelectedItem));
+            await Navigation.PushAsync(new DetailedMovieXF());
         }
     }
 }

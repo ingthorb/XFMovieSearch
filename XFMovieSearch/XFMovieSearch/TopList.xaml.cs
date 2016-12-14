@@ -18,7 +18,6 @@ namespace XFMovieSearch
         {
             InitializeComponent();
             this._movieAPI = new MovieAPI();
-            //GetTopList();
         }
 
         public async Task GetTopList()
@@ -28,7 +27,6 @@ namespace XFMovieSearch
             this._topMovies = topMovies;
             BindingContext = this._topMovies;
             this._indicator.IsRunning = false;
-            System.Diagnostics.Debug.WriteLine("*************+Testing");
         }
         
         private async void Listview_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -38,7 +36,7 @@ namespace XFMovieSearch
                 return;
             }
 
-            await Navigation.PushAsync(new DetailedMovieXF(e.SelectedItem));
+            await Navigation.PushAsync(new DetailedMovieXF());
         }
 
     }
