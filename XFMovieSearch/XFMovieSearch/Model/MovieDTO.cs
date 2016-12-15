@@ -38,7 +38,7 @@ namespace XFMovieSearch
 
 		public string releaseYear => this._releaseYear;
 
-		public string backdropPath => this._backdropPath;
+		public string backdropPath => "http://image.tmdb.org/t/p/w1280" + this._backdropPath;
 
 		public string titleAndYear => this._title + " (" + this._releaseYear + ")";
 
