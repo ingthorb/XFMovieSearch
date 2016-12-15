@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using DLToolkit.Forms.Controls;
 
 namespace XFMovieSearch
 {
@@ -19,7 +20,10 @@ namespace XFMovieSearch
             InitializeComponent();
             this._movieAPI = new MovieAPI();
             this._movieList = new List<MovieDTO>();
+
+			FlowListView.Init();
         }
+
         public async Task GetPopularList()
         {
             this._indicator.IsRunning = true;
@@ -27,18 +31,26 @@ namespace XFMovieSearch
             foreach (MovieInfo info in popMovies)
             {
                 var allCrewMembers = await this._movieAPI.GetMovieCredits(info.Id);
-                System.Diagnostics.Debug.WriteLine("Inside top list");
-                var firstThree = this._movieAPI.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());
 
-                MovieDTO newMovie = new MovieDTO(info.Id, info.Title, firstThree ?? " ", info.PosterPath,
-                                                 info.ReleaseDate.Year.ToString(), info.BackdropPath);
+				string firstThree = "";
+
+				if (allCrewMembers != null && allCrewMembers.CastMembers != null)
+				{
+					firstThree = this._movieAPI.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());	
+				}
+
+                System.Diagnostics.Debug.WriteLine("Inside top list");
+                
+                MovieDTO newMovie = new MovieDTO(info.Id, info.Title ?? "", firstThree ?? " ", info.PosterPath ?? "",
+                                                 info.ReleaseDate.Year.ToString() ?? "", info.BackdropPath ?? "");
 
                 this._movieList.Add(newMovie);
             }
             BindingContext = this._movieList;
             this._indicator.IsRunning = false;
         }
-        private async void Listview_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
             {

@@ -14,6 +14,7 @@ namespace XFMovieSearch
         {
             InitializeComponent();
         }
+
         private async void Listview_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)

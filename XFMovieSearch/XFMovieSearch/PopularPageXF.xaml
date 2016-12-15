@@ -1,17 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XFMovieSearch.PopularPageXF">
+             x:Class="XFMovieSearch.PopularPageXF"
+			xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView">
 
   <ContentPage.Content>
     <StackLayout>
-    <ActivityIndicator x:Name="_indicator"
+    	<ActivityIndicator x:Name="_indicator"
            Color="Black"
            IsRunning="false"/>
-      <ListView x:Name="listview"
-                ItemsSource="{Binding .}"
-                ItemSelected="Listview_OnItemSelected">
-      </ListView>
+      	<flv:FlowListView SeparatorVisibility="None" HasUnevenRows="true"
+			FlowColumnMinWidth="110" FlowItemsSource="{Binding .}">
+
+			<flv:FlowListView.FlowColumnTemplate>
+				<DataTemplate>
+					<Grid Padding="3">
+							
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+						
+						<Image HeightRequest="200" Aspect="AspectFill"
+							Source="{Binding imgPath}"/>
+
+					</Grid>
+				</DataTemplate>
+			</flv:FlowListView.FlowColumnTemplate>
+		
+		</flv:FlowListView>
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
