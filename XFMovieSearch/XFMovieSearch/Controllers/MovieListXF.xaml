@@ -5,9 +5,9 @@
              Title="Movie List">
   
   <ContentPage.Content>
-    <ListView x:Name="listview"
+    <ListView x:Name="SearchResultView"
               ItemsSource="{Binding .}"
-              ItemSelected="Listview_OnItemSelected"
+              ItemSelected="SearchResultView_OnItemSelected"
 			  HasUnevenRows="True">
 		<ListView.ItemTemplate>
 			<DataTemplate>

@@ -26,7 +26,9 @@ namespace XFMovieSearch
         public async Task GetTopList()
         {
 			this._movieList.Clear();
+			listview.IsVisible = false;
 
+			this._indicator.IsVisible = true;
             this._indicator.IsRunning = true;
            
             try
@@ -59,10 +61,12 @@ namespace XFMovieSearch
 
                 this._movieList.Add(newMovie);
             }
+
             this._topMovies = this._movies;
             BindingContext = this._movieList;
             this._indicator.IsRunning = false;
 			this._indicator.IsVisible = false;
+			listview.IsVisible = true;
         }
         
         private async void Listview_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
