@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DM.MovieApi.MovieDb.Movies;
+﻿using DM.MovieApi.MovieDb.Movies;
 using Xamarin.Forms;
 
 namespace XFMovieSearch
@@ -30,10 +25,13 @@ namespace XFMovieSearch
         private async void LoadDetails()
         {
             Movie details = await this._movieAPI.GetMovie(this._currMovie.id);
-            description.Text = details.Overview ?? "";
-            runtime.Text = details.Runtime.ToString() + " min" ?? "";
-            genres.Text = this._movieAPI.getGenres(details.Genres) ?? "";
-            rating.Text = "Rating " + details.VoteAverage.ToString();
+            if (details != null)
+            {
+                description.Text = details.Overview ?? "";
+                runtime.Text = details.Runtime.ToString() + " min" ?? "";
+                genres.Text = this._movieAPI.getGenres(details.Genres) ?? "";
+                rating.Text = "Rating " + details.VoteAverage.ToString();
+            }
         }
     }
 }
