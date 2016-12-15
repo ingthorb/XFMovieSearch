@@ -26,6 +26,13 @@ namespace XFMovieSearch
             var popPageNavigation = new NavigationPage(popPage);
             popPageNavigation.Title = "Popular";
 
+			if (Device.OS == TargetPlatform.iOS)
+			{
+				mainPageNavigation.Icon = "Search";
+				topPageNavigation.Icon = "Top";
+				popPageNavigation.Icon = "Popular";
+			}
+
             var tabbedPage = new TabbedPage();
             tabbedPage.Children.Add(mainPageNavigation);
             tabbedPage.Children.Add(topPageNavigation);
