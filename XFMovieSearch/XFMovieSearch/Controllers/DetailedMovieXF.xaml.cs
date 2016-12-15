@@ -1,4 +1,5 @@
 ﻿using DM.MovieApi.MovieDb.Movies;
+using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
@@ -7,6 +8,8 @@ namespace XFMovieSearch
     public partial class DetailedMovieXF : ContentPage
     {
 		private MovieAPI _movieAPI;
+        private Movie _details;
+        private MovieCredit _credits; 
 		private MovieDTO _currMovie;
         private string _castMembers;
 
@@ -26,18 +29,25 @@ namespace XFMovieSearch
 
         private async void LoadDetails()
         {
-            
-            Movie details = await this._movieAPI.GetMovie(this._currMovie.id);
-            var cast = await this._movieAPI.GetMovieCredits(details.Id);
-            var castMembers = cast.CastMembers;
+            try
+            {
+                this._details = await this._movieAPI.GetMovie(this._currMovie.id);
+                this._credits = await this._movieAPI.GetMovieCredits(this._details.Id);
+            }
+            catch (ArgumentNullException)
+            {
+                await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
+            }
+           
+            var castMembers = this._credits.CastMembers;
             if(castMembers != null)
             { getTopFiveCast(castMembers); }
-            if (details != null)
+            if (this._details != null)
             {
-                description.Text = details.Overview ?? "";
-                runtime.Text = details.Runtime.ToString() + " min" ?? "";
-                genres.Text = this._movieAPI.getGenres(details.Genres) ?? "";
-                rating.Text = "☆ " + details.VoteAverage.ToString();
+                description.Text = this._details.Overview ?? "";
+                runtime.Text = this._details.Runtime.ToString() + " min" ?? "";
+                genres.Text = this._movieAPI.getGenres(this._details.Genres) ?? "";
+                rating.Text = "☆ " + this._details.VoteAverage.ToString();
                 if(this._castMembers != null)
                 {
                     actors.Text = this._castMembers;

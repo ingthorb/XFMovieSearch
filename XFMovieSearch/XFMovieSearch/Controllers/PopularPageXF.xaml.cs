@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using DLToolkit.Forms.Controls;
+using System;
 
 namespace XFMovieSearch
 {
@@ -12,6 +13,7 @@ namespace XFMovieSearch
     {
         private MovieAPI _movieAPI;
         protected List<MovieDTO> _movieList;
+        private List<MovieInfo> _popular;
 
         public PopularPageXF()
         {
@@ -42,8 +44,15 @@ namespace XFMovieSearch
 			this._movieList.Clear();
 
             this._indicator.IsRunning = true;
-            var popMovies = await this._movieAPI.GetPopularMovies();
-            foreach (MovieInfo info in popMovies)
+            try
+            {
+                this._popular = await this._movieAPI.GetPopularMovies();
+            }
+            catch (ArgumentNullException)
+            {
+                await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
+            }
+            foreach (MovieInfo info in this._popular)
             {
                 var allCrewMembers = await this._movieAPI.GetMovieCredits(info.Id);
 
@@ -63,12 +72,6 @@ namespace XFMovieSearch
             this._indicator.IsRunning = false;
 			this._indicator.IsVisible = false;
         }
-
-		//private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
-  //      {
-            
-  //      }
-
 
     }
 }

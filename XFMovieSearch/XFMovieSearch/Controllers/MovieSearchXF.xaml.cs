@@ -9,8 +9,9 @@ namespace XFMovieSearch
     public partial class MovieSearchXF : ContentPage
     {
         private MovieAPI _api;
-
+        private MovieCredit _crew;
 		private List<MovieDTO> _movieList;
+        private List<MovieInfo> _moviesFound;
 
         public MovieSearchXF()
         {
@@ -34,21 +35,35 @@ namespace XFMovieSearch
             this._indicator.IsRunning = true;
 
             var query = MainEntry.Text;
-            var moviesFound = await this._api.SearchForMovies(query);
-            if (moviesFound == null)
+            try
+            {
+              this._moviesFound = await this._api.SearchForMovies(query);
+            }
+            catch (ArgumentNullException)
+            {
+                await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
+            }
+            if (this._moviesFound == null)
             {
                 this.MovieLabel.Text = "No movies found";
                 return;
             }
 
-            foreach (MovieInfo info in moviesFound)
+            foreach (MovieInfo info in this._moviesFound)
 			{
-				var allCrewMembers = await this._api.GetMovieCredits(info.Id);
 
-				string firstThree = "";
-				if (allCrewMembers != null && allCrewMembers.CastMembers != null)
+                try
+                {
+                    this._crew = await this._api.GetMovieCredits(info.Id);
+                }
+                catch (ArgumentNullException)
+                {
+                    await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
+                }
+                string firstThree = "";
+				if (this._crew != null && this._crew.CastMembers != null)
 				{
-					firstThree = this._api.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());
+					firstThree = this._api.GetTopThreeCastMembers(this._crew.CastMembers.ToList());
 				}
 
 				MovieDTO newMovie = new MovieDTO(info.Id, info.Title ?? "", firstThree ?? " ", info.PosterPath ?? "", 

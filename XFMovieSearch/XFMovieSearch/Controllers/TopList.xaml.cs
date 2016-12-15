@@ -1,4 +1,5 @@
 ﻿using DM.MovieApi.MovieDb.Movies;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +12,9 @@ namespace XFMovieSearch
     {
         private MovieAPI _movieAPI;
         protected List<MovieInfo> _topMovies;
+        protected List<MovieInfo> _movies;
         protected List<MovieDTO> _movieList;
+        private MovieCredit _crew;
 
         public TopList()
         {
@@ -25,16 +28,30 @@ namespace XFMovieSearch
 			this._movieList.Clear();
 
             this._indicator.IsRunning = true;
-            var topMovies = await this._movieAPI.GetTopMovies();
-            foreach (MovieInfo info in topMovies)
+           
+            try
             {
-                var allCrewMembers = await this._movieAPI.GetMovieCredits(info.Id);
-            
-				string firstThree = "";
+                this._movies = await this._movieAPI.GetTopMovies();
+            }
+            catch (ArgumentNullException)
+            {
+                await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
+            }
+            foreach (MovieInfo info in this._movies)
+            {
+                try
+                {
+                    this._crew = await this._movieAPI.GetMovieCredits(info.Id);
+                }
+                catch (ArgumentNullException)
+                {
+                    await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
+                }
+                string firstThree = "";
 
-				if (allCrewMembers != null && allCrewMembers.CastMembers != null)
+				if (this._crew != null && this._crew.CastMembers != null)
 				{
-					firstThree = this._movieAPI.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());
+					firstThree = this._movieAPI.GetTopThreeCastMembers(this._crew.CastMembers.ToList());
 				}
 
                 MovieDTO newMovie = new MovieDTO(info.Id, info.Title ?? "", firstThree ?? " ", info.PosterPath ?? "",
@@ -42,7 +59,7 @@ namespace XFMovieSearch
 
                 this._movieList.Add(newMovie);
             }
-            this._topMovies = topMovies;
+            this._topMovies = this._movies;
             BindingContext = this._movieList;
             this._indicator.IsRunning = false;
 			this._indicator.IsVisible = false;

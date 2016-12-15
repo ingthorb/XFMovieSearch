@@ -42,13 +42,29 @@ namespace XFMovieSearch
             this.MainPage = tabbedPage;
             tabbedPage.CurrentPageChanged += async (sender, e) =>
             {
-                if(tabbedPage.CurrentPage.Equals(topPageNavigation))
+                if (tabbedPage.CurrentPage.Equals(topPageNavigation))
                 {
-                    await topPage.GetTopList();
+                    //Tried to have more code reusability with the display Alert but need each page for each occasion
+                    try
+                    {
+                        await topPage.GetTopList();
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        await topPage.DisplayAlert("Alert", "You have tried to get too many movies", "OK");
+                    }
                 }
                 if (tabbedPage.CurrentPage.Equals(popPageNavigation))
                 {
-                    await popPage.GetPopularList();
+                    try
+                    {
+                        await popPage.GetPopularList();
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        await topPage.DisplayAlert("Alert", "You have tried to get too many movies", "OK");
+                    }
+
                 }
             };
         }
