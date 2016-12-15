@@ -22,7 +22,22 @@ namespace XFMovieSearch
             this._movieList = new List<MovieDTO>();
 
 			FlowListView.Init();
+
+			ListenForTap();
         }
+
+		private void ListenForTap()
+		{
+			flowView.FlowItemTapped += async (sender, e) =>
+			{
+				if (e.Item == null)
+				{
+					return;
+				}
+
+				await Navigation.PushAsync(new DetailedMovieXF((MovieDTO)e.Item) { BindingContext = e.Item });
+			};
+		}
 
         public async Task GetPopularList()
         {
@@ -48,16 +63,14 @@ namespace XFMovieSearch
             }
             BindingContext = this._movieList;
             this._indicator.IsRunning = false;
+			this._indicator.IsVisible = false;
         }
 
-        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            if (e.SelectedItem == null)
-            {
-                return;
-            }
+		//private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+  //      {
+            
+  //      }
 
-			await Navigation.PushAsync(new DetailedMovieXF((MovieDTO)e.SelectedItem) { BindingContext = e.SelectedItem });
-        }
+
     }
 }

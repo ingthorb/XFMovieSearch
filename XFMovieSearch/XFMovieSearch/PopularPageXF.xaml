@@ -10,6 +10,7 @@
            Color="Black"
            IsRunning="false"/>
       	<flv:FlowListView SeparatorVisibility="None" HasUnevenRows="true"
+			x:Name="flowView"
 			FlowColumnMinWidth="110" FlowItemsSource="{Binding .}">
 
 			<flv:FlowListView.FlowColumnTemplate>

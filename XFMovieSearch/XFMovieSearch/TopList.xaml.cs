@@ -30,16 +30,23 @@ namespace XFMovieSearch
             {
                 var allCrewMembers = await this._movieAPI.GetMovieCredits(info.Id);
                 System.Diagnostics.Debug.WriteLine("Inside top list");
-                var firstThree = this._movieAPI.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());
 
-                MovieDTO newMovie = new MovieDTO(info.Id, info.Title, firstThree ?? " ", info.PosterPath,
-                                                 info.ReleaseDate.Year.ToString(), info.BackdropPath);
+				string firstThree = "";
+
+				if (allCrewMembers != null && allCrewMembers.CastMembers != null)
+				{
+					firstThree = this._movieAPI.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());
+				}
+
+                MovieDTO newMovie = new MovieDTO(info.Id, info.Title ?? "", firstThree ?? " ", info.PosterPath ?? "",
+                                                 info.ReleaseDate.Year.ToString() ?? "", info.BackdropPath ?? "");
 
                 this._movieList.Add(newMovie);
             }
             this._topMovies = topMovies;
             BindingContext = this._movieList;
             this._indicator.IsRunning = false;
+			this._indicator.IsVisible = false;
         }
         
         private async void Listview_OnItemSelected(object sender, SelectedItemChangedEventArgs e)

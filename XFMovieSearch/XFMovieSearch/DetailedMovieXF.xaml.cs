@@ -31,9 +31,9 @@ namespace XFMovieSearch
 		{
 			Movie details = await this._movieAPI.GetMovie(this._currMovie.id);
 
-			description.Text = details.Overview;
-			runtime.Text = details.Runtime.ToString() + " min";
-			genres.Text = this._movieAPI.getGenres(details.Genres);
+			description.Text = details.Overview ?? "";
+			runtime.Text = details.Runtime.ToString() + " min" ?? "";
+			genres.Text = this._movieAPI.getGenres(details.Genres) ?? "";
 		}
     }
 }
