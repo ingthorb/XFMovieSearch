@@ -96,6 +96,7 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
     <None Include="packages.config" />
+    <Compile Include="Renderers\CustomTabBarRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -114,6 +115,12 @@
     <BundleResource Include="Resources\Icon-Small%402x.png" />
     <BundleResource Include="Resources\Icon-Small%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\Popular_selected.png" />
+    <BundleResource Include="Resources\Popular.png" />
+    <BundleResource Include="Resources\Search_selected.png" />
+    <BundleResource Include="Resources\Search.png" />
+    <BundleResource Include="Resources\Top_selected.png" />
+    <BundleResource Include="Resources\Top.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -139,9 +146,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XFMovieSearch\XFMovieSearch.csproj">
-      <Project>{8c2cbd2f-678d-4716-a1b9-b079bfdba13e}</Project>
+      <Project>{E4989BF0-FCFA-4538-8619-2811B49AEF8B}</Project>
       <Name>XFMovieSearch</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
