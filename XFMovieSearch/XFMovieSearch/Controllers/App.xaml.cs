@@ -14,7 +14,7 @@ namespace XFMovieSearch
         public App()
         {
             InitializeComponent();
-            var mainPage = new MainPage();
+            var mainPage = new MovieSearchXF();
             var mainPageNavigation = new NavigationPage(mainPage);
             mainPageNavigation.Title = "Movie Search";
 
