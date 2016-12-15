@@ -20,7 +20,7 @@
   <Entry x:Name="MainEntry"
          BackgroundColor ="White"
          Placeholder="Forrest Gump...."
-         PlaceholderColor="#FFFAF0"
+         PlaceholderColor="Black"
          TextColor="Black"/>
   
 <Button Clicked="Button_OnClicked"

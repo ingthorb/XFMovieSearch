@@ -27,8 +27,7 @@ namespace XFMovieSearch
             foreach (MovieInfo info in topMovies)
             {
                 var allCrewMembers = await this._movieAPI.GetMovieCredits(info.Id);
-                System.Diagnostics.Debug.WriteLine("Inside top list");
-
+            
 				string firstThree = "";
 
 				if (allCrewMembers != null && allCrewMembers.CastMembers != null)

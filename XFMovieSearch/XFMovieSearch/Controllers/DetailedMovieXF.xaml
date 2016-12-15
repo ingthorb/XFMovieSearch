@@ -52,6 +52,7 @@
 				<Label x:Name="genres"
 						Text=""/>
         <Label x:Name="rating"/>
+        <Label x:Name="actors"/>
 				
 			</StackLayout>
 		</Grid>
