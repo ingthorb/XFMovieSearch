@@ -30,7 +30,8 @@
 				Grid.RowSpan="7"
 				Grid.ColumnSpan="2">
 				<Label
-					Text="{Binding title}"
+          x:Name ="Title"
+					Text="{Binding titleAndYear}"
 					FontSize="25"
 					FontAttributes="Bold"
 					HorizontalTextAlignment="Start"
@@ -50,6 +51,7 @@
 				
 				<Label x:Name="genres"
 						Text=""/>
+        <Label x:Name="rating"/>
 				
 			</StackLayout>
 		</Grid>

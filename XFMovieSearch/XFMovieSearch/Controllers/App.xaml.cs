@@ -14,7 +14,7 @@ namespace XFMovieSearch
         public App()
         {
             InitializeComponent();
-            var mainPage = new MainPage();
+            var mainPage = new MovieSearchXF();
             var mainPageNavigation = new NavigationPage(mainPage);
             mainPageNavigation.Title = "Movie Search";
 
@@ -40,24 +40,20 @@ namespace XFMovieSearch
 
             this._tabbedPage = tabbedPage;
             this.MainPage = tabbedPage;
-            System.Diagnostics.Debug.WriteLine("Inside app");
             tabbedPage.CurrentPageChanged += async (sender, e) =>
             {
                 if(tabbedPage.CurrentPage.Equals(topPageNavigation))
                 {
-                    System.Diagnostics.Debug.WriteLine("Testing");
                     await topPage.GetTopList();
                 }
                 if (tabbedPage.CurrentPage.Equals(popPageNavigation))
                 {
-                    System.Diagnostics.Debug.WriteLine("PopPage");
                     await popPage.GetPopularList();
                 }
             };
             }
 
-        
-
+       
         protected override void OnStart()
         {
             // Handle when your app starts
@@ -70,7 +66,6 @@ namespace XFMovieSearch
 
         protected override void OnResume()
         {
-            System.Diagnostics.Debug.WriteLine("Inside app");
             // Handle when your app resumes
         }
     }

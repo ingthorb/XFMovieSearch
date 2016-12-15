@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DM.MovieApi.MovieDb.Movies;
 using Xamarin.Forms;
 
 namespace XFMovieSearch
 {
-    public partial class MainPage : ContentPage
+    public partial class MovieSearchXF : ContentPage
     {
         private MovieAPI _api;
 
 		private List<MovieDTO> _movieList;
 
-        public MainPage()
+        public MovieSearchXF()
         {
             InitializeComponent();
 
@@ -37,8 +35,13 @@ namespace XFMovieSearch
 
             var query = MainEntry.Text;
             var moviesFound = await this._api.SearchForMovies(query);
+            if (moviesFound == null)
+            {
+                this.MovieLabel.Text = "No movies found";
+                return;
+            }
 
-			foreach (MovieInfo info in moviesFound)
+            foreach (MovieInfo info in moviesFound)
 			{
 				var allCrewMembers = await this._api.GetMovieCredits(info.Id);
 
@@ -56,12 +59,6 @@ namespace XFMovieSearch
 
             this._indicator.IsRunning = false;
             
-            if (moviesFound == null)
-            {
-                this.MovieLabel.Text = "No movies found";
-                return;
-            }
-
 			await Navigation.PushAsync(new MovieListXF() {BindingContext = this._movieList});
         }
     }

@@ -36,34 +36,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="API\MovieAPI.cs" />
-    <Compile Include="App.xaml.cs">
+    <Compile Include="Controllers\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DetailedMovieXF.xaml.cs">
+    <Compile Include="Controllers\DetailedMovieXF.xaml.cs">
       <DependentUpon>DetailedMovieXF.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Controllers\MovieSearchXF.xaml.cs">
+      <DependentUpon>MovieSearchXF.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MovieDbSettings.cs" />
-    <Compile Include="MovieListXF.xaml.cs">
+    <Compile Include="MovieSettings\MovieDbSettings.cs" />
+    <Compile Include="Controllers\MovieListXF.xaml.cs">
       <DependentUpon>MovieListXF.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PopularPageXF.xaml.cs">
+    <Compile Include="Controllers\PopularPageXF.xaml.cs">
       <DependentUpon>PopularPageXF.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TopList.xaml.cs">
+    <Compile Include="Controllers\TopList.xaml.cs">
       <DependentUpon>TopList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\MovieDTO.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainPage.xaml">
+    <EmbeddedResource Include="Controllers\MovieSearchXF.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="App.xaml">
+    <EmbeddedResource Include="Controllers\App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -98,30 +98,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MovieListXF.xaml">
+    <EmbeddedResource Include="Controllers\MovieListXF.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TopList.xaml">
+    <EmbeddedResource Include="Controllers\TopList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DetailedMovieXF.xaml">
+    <EmbeddedResource Include="Controllers\DetailedMovieXF.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controllers\PopularPageXF.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <EmbeddedResource Include="PopularPageXF.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
