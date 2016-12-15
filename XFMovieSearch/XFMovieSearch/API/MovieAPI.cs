@@ -40,16 +40,15 @@ namespace XFMovieSearch
             
             ApiSearchResponse<MovieInfo> response = await this._movieApi.GetTopRatedAsync();
 
-            return response.Results.ToList();
+            return response.Results.ToList() ?? null;
         }
 
 
         public async Task<List<MovieInfo>> GetPopularMovies()
         {
-
             ApiSearchResponse<MovieInfo> response = await this._movieApi.GetPopularAsync();
 
-            return response.Results.ToList();
+			return response.Results.ToList() ?? null;
         }
 
         public async Task<Movie> GetMovie(int movieId)
