@@ -2,15 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XFMovieSearch.MovieListXF"
-             Title="Movie List"
-             BackgroundColor="#262626">
+             Title="Movie List">
   
   <ContentPage.Content>
     <ListView x:Name="listview"
               ItemsSource="{Binding .}"
               ItemSelected="Listview_OnItemSelected"
-			  HasUnevenRows="True"
-			  BackgroundColor="Black">
+			  HasUnevenRows="True">
 		<ListView.ItemTemplate>
 			<DataTemplate>
 				<ViewCell>
@@ -27,11 +25,11 @@
 								Text="{Binding titleAndYear}"
 								FontAttributes="None"
 								FontSize="Medium"
-								TextColor="#ffa500"/>
+								TextColor="Black"/>
 						<Label Grid.Row="1" Grid.Column="0"
 								Text="{Binding firstThreeCastMembers}"
 								FontSize="Small"
-								TextColor="#ffa500"/>
+								TextColor="Black"/>
 						<Image Grid.Row="0" Grid.Column="1"
 								Grid.RowSpan="2"
 								HeightRequest="30"

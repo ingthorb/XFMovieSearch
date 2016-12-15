@@ -12,8 +12,7 @@
 	      <ListView x:Name="listview"
 	              ItemsSource="{Binding .}"
 	              ItemSelected="Listview_OnItemSelected"
-				  HasUnevenRows="True"
-				  BackgroundColor="Black">
+				  HasUnevenRows="True">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<ViewCell>
@@ -30,11 +29,11 @@
 									Text="{Binding titleAndYear}"
 									FontAttributes="None"
 									FontSize="Medium"
-									TextColor="#ffa500"/>
+									TextColor="Black"/>
 							<Label Grid.Row="1" Grid.Column="0"
 									Text="{Binding firstThreeCastMembers}"
 									FontSize="Small"
-									TextColor="#ffa500"/>
+									TextColor="Black"/>
 							<Image Grid.Row="0" Grid.Column="1"
 									Grid.RowSpan="2"
 									HeightRequest="30"

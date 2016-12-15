@@ -3,41 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XFMovieSearch"
              x:Class="XFMovieSearch.MainPage"
-             Title="Movie Search"
-             BackgroundColor="#262626">
+             Title="Movie Search">
   
 <StackLayout VerticalOptions = "Center"
              Spacing="20"
-             BackgroundColor ="#262626"
+             BackgroundColor ="White"
              Margin="30">
   
   <Label x:Name="EnterMovieLabel"
          FontSize="30"
          Text="Search for a movie!"
-         TextColor="White"
+         TextColor="Black"
          FontFamily="Helvetica"
          FontAttributes="Bold"/>
   
   <Entry x:Name="MainEntry"
-         BackgroundColor ="#424242"
+         BackgroundColor ="White"
          Placeholder="Forrest Gump...."
          PlaceholderColor="#FFFAF0"
-         TextColor="White"/>
+         TextColor="Black"/>
   
 <Button Clicked="Button_OnClicked"
         Text="Search"
         HorizontalOptions ="LayoutOptions.Fill"
         BackgroundColor="#FFA500"
-        TextColor="White"/>
+        TextColor="Black"/>
   
   <Label x:Name="MovieLabel"
          FontSize="25"
-         TextColor ="White"
+         TextColor ="Black"
          FontFamily="Helvetica"
          FontAttributes="Bold"/>
   
   <ActivityIndicator x:Name="_indicator"
-                     Color="White"
+                     Color="Red"
                      IsRunning="false"/>
 
 </StackLayout> 
