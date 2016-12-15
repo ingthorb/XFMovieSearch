@@ -1,8 +1,6 @@
 ﻿using DM.MovieApi.MovieDb.Movies;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -53,8 +51,6 @@ namespace XFMovieSearch
 				{
 					firstThree = this._movieAPI.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());	
 				}
-
-                System.Diagnostics.Debug.WriteLine("Inside top list");
                 
                 MovieDTO newMovie = new MovieDTO(info.Id, info.Title ?? "", firstThree ?? " ", info.PosterPath ?? "",
                                                  info.ReleaseDate.Year.ToString() ?? "", info.BackdropPath ?? "");
