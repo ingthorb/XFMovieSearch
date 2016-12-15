@@ -25,14 +25,14 @@ namespace XFMovieSearch
         {
             ApiSearchResponse<MovieInfo> response = await this._movieApi.SearchByTitleAsync(query);
 
-            return response.Results.ToList();
+			return response.Results.ToList() ?? new List<MovieInfo>();
         }
 
         public async Task<MovieCredit> GetMovieCredits(int movieId)
         {
             ApiQueryResponse<MovieCredit> response = await this._movieApi.GetCreditsAsync(movieId);
 
-            return response.Item;
+			return response.Item ?? new MovieCredit();
         }
 
         public async Task<List<MovieInfo>> GetTopMovies()
@@ -40,7 +40,7 @@ namespace XFMovieSearch
             
             ApiSearchResponse<MovieInfo> response = await this._movieApi.GetTopRatedAsync();
 
-            return response.Results.ToList() ?? null;
+			return response.Results.ToList() ?? new List<MovieInfo>();
         }
 
 
@@ -48,14 +48,14 @@ namespace XFMovieSearch
         {
             ApiSearchResponse<MovieInfo> response = await this._movieApi.GetPopularAsync();
 
-			return response.Results.ToList() ?? null;
+			return response.Results.ToList() ?? new List<MovieInfo>();
         }
 
         public async Task<Movie> GetMovie(int movieId)
         {
             ApiQueryResponse<Movie> response = await this._movieApi.FindByIdAsync(movieId);
 
-            return response.Item;
+			return response.Item ?? new Movie();
         }
 
         // Methods which manipulate data from the API
