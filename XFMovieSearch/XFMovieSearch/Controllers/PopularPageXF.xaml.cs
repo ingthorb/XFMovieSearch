@@ -39,6 +39,8 @@ namespace XFMovieSearch
 
         public async Task GetPopularList()
         {
+			this._movieList.Clear();
+
             this._indicator.IsRunning = true;
             var popMovies = await this._movieAPI.GetPopularMovies();
             foreach (MovieInfo info in popMovies)

@@ -7,7 +7,7 @@
   <ContentPage.Content>
     <StackLayout>
     	<ActivityIndicator x:Name="_indicator"
-           Color="Black"
+           Color="Gray"
            IsRunning="false"/>
       	<flv:FlowListView SeparatorVisibility="None" HasUnevenRows="true"
 			x:Name="flowView"

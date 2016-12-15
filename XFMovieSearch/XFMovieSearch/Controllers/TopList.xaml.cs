@@ -22,6 +22,8 @@ namespace XFMovieSearch
 
         public async Task GetTopList()
         {
+			this._movieList.Clear();
+
             this._indicator.IsRunning = true;
             var topMovies = await this._movieAPI.GetTopMovies();
             foreach (MovieInfo info in topMovies)

@@ -51,7 +51,7 @@ namespace XFMovieSearch
                     await popPage.GetPopularList();
                 }
             };
-            }
+        }
 
        
         protected override void OnStart()
