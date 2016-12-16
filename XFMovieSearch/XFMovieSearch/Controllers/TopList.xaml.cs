@@ -21,9 +21,10 @@ namespace XFMovieSearch
             InitializeComponent();
             this._movieAPI = new MovieAPI();
             this._movieList = new List<MovieDTO>();
+            GetTopList();
         }
 
-        public async Task GetTopList()
+        public async void GetTopList()
         {
 			this._movieList.Clear();
 
@@ -37,32 +38,35 @@ namespace XFMovieSearch
             {
                 await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
             }
-            foreach (MovieInfo info in this._movies)
+            if (this._movies != null)
             {
-                try
+                foreach (MovieInfo info in this._movies)
                 {
-                    this._crew = await this._movieAPI.GetMovieCredits(info.Id);
+                    try
+                    {
+                        this._crew = await this._movieAPI.GetMovieCredits(info.Id);
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
+                    }
+                    string firstThree = "";
+
+                    if (this._crew != null && this._crew.CastMembers != null)
+                    {
+                        firstThree = this._movieAPI.GetTopThreeCastMembers(this._crew.CastMembers.ToList());
+                    }
+
+                    MovieDTO newMovie = new MovieDTO(info.Id, info.Title ?? "", firstThree ?? " ", info.PosterPath ?? "",
+                                                     info.ReleaseDate.Year.ToString() ?? "", info.BackdropPath ?? "");
+
+                    this._movieList.Add(newMovie);
                 }
-                catch (ArgumentNullException)
-                {
-                    await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
-                }
-                string firstThree = "";
-
-				if (this._crew != null && this._crew.CastMembers != null)
-				{
-					firstThree = this._movieAPI.GetTopThreeCastMembers(this._crew.CastMembers.ToList());
-				}
-
-                MovieDTO newMovie = new MovieDTO(info.Id, info.Title ?? "", firstThree ?? " ", info.PosterPath ?? "",
-                                                 info.ReleaseDate.Year.ToString() ?? "", info.BackdropPath ?? "");
-
-                this._movieList.Add(newMovie);
+                this._topMovies = this._movies;
+                BindingContext = this._movieList;
+                this._indicator.IsRunning = false;
+                this._indicator.IsVisible = false;
             }
-            this._topMovies = this._movies;
-            BindingContext = this._movieList;
-            this._indicator.IsRunning = false;
-			this._indicator.IsVisible = false;
         }
         
         private async void Listview_OnItemSelected(object sender, SelectedItemChangedEventArgs e)

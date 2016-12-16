@@ -20,7 +20,7 @@ namespace XFMovieSearch
             InitializeComponent();
             this._movieAPI = new MovieAPI();
             this._movieList = new List<MovieDTO>();
-
+            GetPopularList();
 			FlowListView.Init();
 
 			ListenForTap();
@@ -39,7 +39,7 @@ namespace XFMovieSearch
 			};
 		}
 
-        public async Task GetPopularList()
+        public async void GetPopularList()
         {
 			this._movieList.Clear();
 

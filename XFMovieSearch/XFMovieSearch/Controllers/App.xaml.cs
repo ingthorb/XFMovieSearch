@@ -40,13 +40,14 @@ namespace XFMovieSearch
 
             this._tabbedPage = tabbedPage;
             this.MainPage = tabbedPage;
-            tabbedPage.CurrentPageChanged += async (sender, e) =>
+            /*tabbedPage.CurrentPageChanged += async (sender, e) =>
             {
                 if (tabbedPage.CurrentPage.Equals(topPageNavigation))
                 {
                     //Tried to have more code reusability with the display Alert but need each page for each occasion
                     try
                     {
+                       
                         await topPage.GetTopList();
                     }
                     catch (ArgumentNullException)
@@ -66,7 +67,7 @@ namespace XFMovieSearch
                     }
 
                 }
-            };
+            };*/
         }
 
        
