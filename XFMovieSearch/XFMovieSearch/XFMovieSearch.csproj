@@ -46,9 +46,6 @@
       <DependentUpon>MovieSearchXF.xaml</DependentUpon>
     </Compile>
     <Compile Include="MovieSettings\MovieDbSettings.cs" />
-    <Compile Include="Controllers\MovieListXF.xaml.cs">
-      <DependentUpon>MovieListXF.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\PopularPageXF.xaml.cs">
       <DependentUpon>PopularPageXF.xaml</DependentUpon>
     </Compile>
@@ -96,12 +93,6 @@
     <Reference Include="DLToolkit.Forms.Controls.FlowListView">
       <HintPath>..\..\packages\DLToolkit.Forms.Controls.FlowListView.2.0.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\DLToolkit.Forms.Controls.FlowListView.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controllers\MovieListXF.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controllers\TopList.xaml">

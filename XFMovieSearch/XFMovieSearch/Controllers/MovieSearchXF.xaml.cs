@@ -21,20 +21,29 @@ namespace XFMovieSearch
 			_movieList = new List<MovieDTO>();
 
             this.Title = "Movie Search";
+            searchbar.SearchCommand = new Command(() => { OnSearch(); });
         }
+        
 
-        private async void Button_OnClicked(object sender, EventArgs e)
+        private async void OnSearch()
         {
 			this._movieList.Clear();
+            if (this._moviesFound != null)
+            {
+                this._moviesFound.Clear();
+            }
+            SearchResultView.IsVisible = false;
 
-			if (MainEntry.Text == null || MainEntry.Text == "")
+            if (searchbar.Text == null || searchbar.Text == "")
             {
                 return;
             }
 
             this._indicator.IsRunning = true;
+            var query = searchbar.Text;
 
-            var query = MainEntry.Text;
+            SearchResultView.ItemsSource = null;
+
             try
             {
               this._moviesFound = await this._api.SearchForMovies(query);
@@ -48,10 +57,13 @@ namespace XFMovieSearch
                 this.MovieLabel.Text = "No movies found";
                 return;
             }
+            else
+            {
+                this.MovieLabel.Text = "";
+            }
 
             foreach (MovieInfo info in this._moviesFound)
 			{
-
                 try
                 {
                     this._crew = await this._api.GetMovieCredits(info.Id);
@@ -70,11 +82,23 @@ namespace XFMovieSearch
 				                                 info.ReleaseDate.Year.ToString() ?? "", info.BackdropPath ?? "");
 
 				this._movieList.Add(newMovie);
-			}
+
+            }
 
             this._indicator.IsRunning = false;
-            
-			await Navigation.PushAsync(new MovieListXF() {BindingContext = this._movieList});
+            BindingContext = this._movieList;
+            SearchResultView.IsVisible = true;
+            SearchResultView.ItemsSource = this._movieList;
+
+        }
+        private async void SearchResultView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null)
+            {
+                return;
+            }
+
+            await Navigation.PushAsync(new DetailedMovieXF((MovieDTO)e.SelectedItem) { BindingContext = e.SelectedItem });
         }
     }
 }
