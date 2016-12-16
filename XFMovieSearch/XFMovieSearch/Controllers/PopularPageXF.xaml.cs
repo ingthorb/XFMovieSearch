@@ -52,9 +52,9 @@ namespace XFMovieSearch
 		{
 			this._movieList.Clear();
 			flowView.IsVisible = false;
+			_indicator.IsVisible = true;
+			_indicator.IsRunning = true;
 
-			this._indicator.IsVisible = true;
-			this._indicator.IsRunning = true;
 			try
 			{
 				this._popular = await this._movieAPI.GetPopularMovies();
@@ -63,15 +63,15 @@ namespace XFMovieSearch
 			{
 				await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
 			}
+
 			foreach (MovieInfo info in this._popular)
 			{
 				var allCrewMembers = await this._movieAPI.GetMovieCredits(info.Id);
 
 				string firstThree = "";
-
 				if (allCrewMembers != null && allCrewMembers.CastMembers != null)
 				{
-					firstThree = this._movieAPI.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());
+					firstThree = this._movieAPI.GetTopCastMembers(allCrewMembers.CastMembers.ToList(), 3);
 				}
 
 				MovieDTO newMovie = new MovieDTO(info.Id, info.Title ?? "", firstThree ?? " ", info.PosterPath ?? "",
@@ -79,10 +79,11 @@ namespace XFMovieSearch
 
 				this._movieList.Add(newMovie);
 			}
+
 			BindingContext = this._movieList;
 			flowView.IsRefreshing = false;
-			this._indicator.IsRunning = false;
-			this._indicator.IsVisible = false;
+			_indicator.IsRunning = false;
+			_indicator.IsVisible = false;
 			flowView.IsVisible = true;
 		}
 

@@ -28,10 +28,12 @@ namespace XFMovieSearch
         private async void OnSearch()
         {
 			this._movieList.Clear();
+
             if (this._moviesFound != null)
             {
                 this._moviesFound.Clear();
             }
+
 			MovieLabel.IsVisible = false;
             SearchResultView.IsVisible = false;
 
@@ -54,6 +56,7 @@ namespace XFMovieSearch
             {
                 await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
             }
+
             if (this._moviesFound == null)
             {
 				IsVisible = true;
@@ -75,10 +78,11 @@ namespace XFMovieSearch
                 {
                     await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
                 }
+
                 string firstThree = "";
 				if (this._crew != null && this._crew.CastMembers != null)
 				{
-					firstThree = this._api.GetTopThreeCastMembers(this._crew.CastMembers.ToList());
+					firstThree = this._api.GetTopCastMembers(this._crew.CastMembers.ToList(), 3);
 				}
 
 				MovieDTO newMovie = new MovieDTO(info.Id, info.Title ?? "", firstThree ?? " ", info.PosterPath ?? "", 

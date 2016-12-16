@@ -60,14 +60,14 @@ namespace XFMovieSearch
 
         // Methods which manipulate data from the API
 
-        public string GetTopThreeCastMembers(List<MovieCastMember> members)
+        public string GetTopCastMembers(List<MovieCastMember> members, int numberOfRequestedActors)
         {
             string res = "";
             if (members != null && members.Count > 0)
             {
                 for (int i = 0; i < members.Count; i++)
                 {
-                    if (i == 3)
+                    if (i == numberOfRequestedActors)
                     {
                         break;
                     }
@@ -87,34 +87,7 @@ namespace XFMovieSearch
             return res;
         }
 
-        public string GetTopTenCastList(List<MovieCastMember> members)
-        {
-            string res = "";
-            if (members != null && members.Count > 0)
-            {
-                for (int i = 0; i < members.Count; i++)
-                {
-                    if (i == 10)
-                    {
-                        break;
-                    }
-
-                    res += members[i].Name;
-
-                    if (i != members.Count - 1)
-                    {
-                        res += ", ";
-                    }
-                }
-            }
-            if (res.Length > 0)
-            {
-                res = res.Substring(0, res.Length - 2);
-            }
-            return res;
-        }
-
-		public string getGenres(IReadOnlyList<Genre> genres)
+		public string GetGenres(IReadOnlyList<Genre> genres)
 		{
 			string genresStr = "";
 			for (var i = 0; i < genres.Count; i++)

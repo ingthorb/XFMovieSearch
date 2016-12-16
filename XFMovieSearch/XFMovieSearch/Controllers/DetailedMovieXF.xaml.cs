@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace XFMovieSearch
 {
@@ -39,42 +40,25 @@ namespace XFMovieSearch
                 await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
             }
            
-            var castMembers = this._credits.CastMembers;
-            if(castMembers != null)
-            { getTopFiveCast(castMembers); }
+			var castMembers = this._credits.CastMembers.ToList();
+
+            if (castMembers != null)
+            { 
+				this._castMembers = this._movieAPI.GetTopCastMembers(castMembers, 5); 
+			}
+
             if (this._details != null)
             {
                 description.Text = this._details.Overview ?? "";
                 runtime.Text = this._details.Runtime.ToString() + " min" ?? "";
-                genres.Text = this._movieAPI.getGenres(this._details.Genres) ?? "";
+                genres.Text = this._movieAPI.GetGenres(this._details.Genres) ?? "";
                 rating.Text = "☆ " + this._details.VoteAverage.ToString();
-                if(this._castMembers != null)
+
+                if (this._castMembers != null)
                 {
                     actors.Text = this._castMembers;
                 }
             }
-        }
-        private void getTopFiveCast(IReadOnlyList<MovieCastMember> members)
-        {
-            string actors = "";
-
-            if (members != null && members != null)
-            {
-                for (var i = 0; i < members.Count; i++)
-                {
-                    if (i == 5)
-                    {
-                        break;
-                    }
-                    actors += members[i].Name;
-                    actors += "\n";
-                }
-                if (actors.Length > 0)
-                {
-                    actors = actors.Substring(0, actors.Length - 1);
-                }
-            }
-            this._castMembers = actors;
         }
 
     }
