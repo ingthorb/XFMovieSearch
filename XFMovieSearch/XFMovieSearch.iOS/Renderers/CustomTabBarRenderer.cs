@@ -5,6 +5,12 @@ using XFMovieSearch.iOS.Renderers;
 using UIKit;
 using System.Text.RegularExpressions;
 
+/**
+ * Credit goes to Gerald Versluis, for his sample of 
+ * creating a Custom Renderer for tab bar icons in iOS:
+ * https://blog.verslu.is/xamarin/xamarin-forms-xamarin/spicing-up-your-xamarin-formsios-tabbar/
+ */
+
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(CustomTabBarRenderer))]
 namespace XFMovieSearch.iOS.Renderers
 {

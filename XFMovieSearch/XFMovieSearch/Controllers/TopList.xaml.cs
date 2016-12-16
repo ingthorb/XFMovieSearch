@@ -12,7 +12,6 @@ namespace XFMovieSearch
     {
         private MovieAPI _movieAPI;
         protected List<MovieInfo> _topMovies;
-        protected List<MovieInfo> _movies;
         protected List<MovieDTO> _movieList;
         private MovieCredit _crew;
 
@@ -26,22 +25,25 @@ namespace XFMovieSearch
 
         public async void GetTopList()
         {
-			this._movieList.Clear();
+            this._movieList.Clear();
 
+            listview.IsVisible = false;
+            this._indicator.IsVisible = true;
             this._indicator.IsRunning = true;
-           
+
             try
             {
-                this._movies = await this._movieAPI.GetTopMovies();
+                this._topMovies = await this._movieAPI.GetTopMovies();
             }
             catch (ArgumentNullException)
             {
                 await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
             }
-            if (this._movies != null)
+            if (this._topMovies != null)
             {
-                foreach (MovieInfo info in this._movies)
+                foreach (MovieInfo info in this._topMovies)
                 {
+
                     try
                     {
                         this._crew = await this._movieAPI.GetMovieCredits(info.Id);
@@ -50,6 +52,8 @@ namespace XFMovieSearch
                     {
                         await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
                     }
+
+
                     string firstThree = "";
 
                     if (this._crew != null && this._crew.CastMembers != null)
@@ -62,10 +66,11 @@ namespace XFMovieSearch
 
                     this._movieList.Add(newMovie);
                 }
-                this._topMovies = this._movies;
                 BindingContext = this._movieList;
                 this._indicator.IsRunning = false;
                 this._indicator.IsVisible = false;
+                listview.IsVisible = true;
+
             }
         }
         
