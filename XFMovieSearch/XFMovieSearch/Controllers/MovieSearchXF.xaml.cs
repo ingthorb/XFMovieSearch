@@ -32,6 +32,7 @@ namespace XFMovieSearch
             {
                 this._moviesFound.Clear();
             }
+			MovieLabel.IsVisible = false;
             SearchResultView.IsVisible = false;
 
             if (searchbar.Text == null || searchbar.Text == "")
@@ -40,6 +41,7 @@ namespace XFMovieSearch
             }
 
             this._indicator.IsRunning = true;
+			this._indicator.IsVisible = true;
             var query = searchbar.Text;
 
             SearchResultView.ItemsSource = null;
@@ -54,6 +56,7 @@ namespace XFMovieSearch
             }
             if (this._moviesFound == null)
             {
+				IsVisible = true;
                 this.MovieLabel.Text = "No movies found";
                 return;
             }
@@ -86,6 +89,7 @@ namespace XFMovieSearch
             }
 
             this._indicator.IsRunning = false;
+			this._indicator.IsVisible = false;
             BindingContext = this._movieList;
             SearchResultView.IsVisible = true;
             SearchResultView.ItemsSource = this._movieList;

@@ -12,7 +12,8 @@
 	      <ListView x:Name="listview"
 	              ItemsSource="{Binding .}"
 	              ItemSelected="Listview_OnItemSelected"
-				  HasUnevenRows="True">
+				  HasUnevenRows="True"
+				  IsPullToRefreshEnabled="true">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 				<ViewCell>

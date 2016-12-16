@@ -11,6 +11,7 @@
            IsRunning="false"/>
       	<flv:FlowListView SeparatorVisibility="None" HasUnevenRows="true"
 			x:Name="flowView"
+			IsPullToRefreshEnabled="true"
 			FlowColumnMinWidth="110" FlowItemsSource="{Binding .}">
 
 			<flv:FlowListView.FlowColumnTemplate>

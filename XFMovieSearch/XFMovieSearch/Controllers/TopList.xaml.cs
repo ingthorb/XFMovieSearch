@@ -21,7 +21,17 @@ namespace XFMovieSearch
             this._movieAPI = new MovieAPI();
             this._movieList = new List<MovieDTO>();
             GetTopList();
+
+			ListRefreshListener();
         }
+
+		public void ListRefreshListener()
+		{
+			listview.Refreshing += (sender, e) =>
+			{
+				GetTopList();
+			};
+		}
 
         public async void GetTopList()
         {
@@ -69,6 +79,7 @@ namespace XFMovieSearch
                 BindingContext = this._movieList;
                 this._indicator.IsRunning = false;
                 this._indicator.IsVisible = false;
+				listview.IsRefreshing = false;
                 listview.IsVisible = true;
 
             }

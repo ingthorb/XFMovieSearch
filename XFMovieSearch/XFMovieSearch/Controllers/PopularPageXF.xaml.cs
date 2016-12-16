@@ -23,10 +23,11 @@ namespace XFMovieSearch
             GetPopularList();
 			FlowListView.Init();
 
-			ListenForTap();
+			TapListener();
+			FlowViewRefreshListener();
         }
 
-		private void ListenForTap()
+		private void TapListener()
 		{
 			flowView.FlowItemTapped += async (sender, e) =>
 			{
@@ -39,39 +40,51 @@ namespace XFMovieSearch
 			};
 		}
 
-        public async void GetPopularList()
-        {
-			this._movieList.Clear();
+		private void FlowViewRefreshListener()
+		{
+			flowView.Refreshing += (sender, e) =>
+			{
+				GetPopularList();
+			};
+		}
 
-            this._indicator.IsRunning = true;
-            try
-            {
-                this._popular = await this._movieAPI.GetPopularMovies();
-            }
-            catch (ArgumentNullException)
-            {
-                await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
-            }
-            foreach (MovieInfo info in this._popular)
-            {
-                var allCrewMembers = await this._movieAPI.GetMovieCredits(info.Id);
+		public async void GetPopularList()
+		{
+			this._movieList.Clear();
+			flowView.IsVisible = false;
+
+			this._indicator.IsVisible = true;
+			this._indicator.IsRunning = true;
+			try
+			{
+				this._popular = await this._movieAPI.GetPopularMovies();
+			}
+			catch (ArgumentNullException)
+			{
+				await DisplayAlert("Alert", "You have tried to get too many movies", "OK");
+			}
+			foreach (MovieInfo info in this._popular)
+			{
+				var allCrewMembers = await this._movieAPI.GetMovieCredits(info.Id);
 
 				string firstThree = "";
 
 				if (allCrewMembers != null && allCrewMembers.CastMembers != null)
 				{
-					firstThree = this._movieAPI.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());	
+					firstThree = this._movieAPI.GetTopThreeCastMembers(allCrewMembers.CastMembers.ToList());
 				}
-                
-                MovieDTO newMovie = new MovieDTO(info.Id, info.Title ?? "", firstThree ?? " ", info.PosterPath ?? "",
-                                                 info.ReleaseDate.Year.ToString() ?? "", info.BackdropPath ?? "");
 
-                this._movieList.Add(newMovie);
-            }
-            BindingContext = this._movieList;
-            this._indicator.IsRunning = false;
+				MovieDTO newMovie = new MovieDTO(info.Id, info.Title ?? "", firstThree ?? " ", info.PosterPath ?? "",
+												 info.ReleaseDate.Year.ToString() ?? "", info.BackdropPath ?? "");
+
+				this._movieList.Add(newMovie);
+			}
+			BindingContext = this._movieList;
+			flowView.IsRefreshing = false;
+			this._indicator.IsRunning = false;
 			this._indicator.IsVisible = false;
-        }
+			flowView.IsVisible = true;
+		}
 
     }
 }

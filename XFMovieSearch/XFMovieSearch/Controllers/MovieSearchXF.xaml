@@ -8,15 +8,8 @@
 <StackLayout Spacing="20"
              Margin="30">
   
-  <Label x:Name="EnterMovieLabel"
-         FontSize="30"
-         Text="Search for a movie!"
-         TextColor="Black"
-         FontFamily="Helvetica"
-         FontAttributes="Bold"/>
-  
   <SearchBar x:Name="searchbar"
-         Placeholder="Forrest Gump...."
+         Placeholder="Shawshank Redemption..."
          PlaceholderColor="Black"
          TextColor="Black"/>
   
@@ -24,11 +17,13 @@
          FontSize="25"
          TextColor ="Black"
          FontFamily="Helvetica"
-         FontAttributes="Bold"/>
+         FontAttributes="Bold"
+		 IsVisible = "false"/>
   
   <ActivityIndicator x:Name="_indicator"
                      Color="Gray"
-                     IsRunning="false"/>
+                     IsRunning="false"
+					 IsVisible = "false"/>
 
     <ListView x:Name="SearchResultView"
               ItemsSource="{Binding .}"
